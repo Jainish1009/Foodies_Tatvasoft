@@ -63,12 +63,14 @@ namespace Foodies.Controllers
             else
             {
 
-                HttpContext.Session.SetInt32("userid", loginuser.UserId);
-                HttpContext.Session.SetInt32("usertype", loginuser.UserType);
+                //HttpContext.Session.SetInt32("userid", loginuser.UserId);
+                //HttpContext.Session.SetInt32("usertype", loginuser.UserType);
 
                 if (loginuser.UserType == 1)
                 {
+                    HttpContext.Session.SetInt32("userid", user.UserId);
                     HttpContext.Session.SetString("Email", user.Email);
+                    
                     return RedirectToAction("CustDash", "Customer");
                 }
                 else if (loginuser.UserType == 2)

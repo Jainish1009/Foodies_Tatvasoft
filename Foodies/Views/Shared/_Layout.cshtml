@@ -44,11 +44,13 @@
                     <div class="login">
                         <ul>
 
+
                             @if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("Email")))
                             {
                                 <li class="nav-item nav-link text-dark">@HttpContextAccessor.HttpContext.Session.GetString("Email")</li>
                                 <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Logut">Logut</a></li>
                             }
+                       
                             else
                             {
                                 <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a></li>

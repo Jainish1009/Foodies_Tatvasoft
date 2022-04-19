@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Foodies.Models;
+using Foodies.Models.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +12,32 @@ namespace Foodies.Controllers
 
     public class CustomerController : Controller
     {
+        private ZomatoContext _context;
+
+        public CustomerController(ZomatoContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult CustDash()
         {
-            return View();
+            var display = _context.Users.Where(u => u.UserType == 2).ToList();
+
+
+            return View(display);
         }
+
+        public IActionResult Search(string search)
+        {
+            List<User> model = _context.Users.Where(p => p.FullName == search).ToList();
+            return View("CustDash", model);
+        }
+        public IActionResult GetAll()
+        {
+            List<User> model = _context.Users.ToList();
+            return RedirectToAction("CustDash", "Customer");
+        }
+
+
     }
 }

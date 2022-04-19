@@ -9,7 +9,7 @@ namespace Foodies.Models.ViewModels
     public class LoginFormViewModel
     {
         [Key]
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [DataType(DataType.EmailAddress)]

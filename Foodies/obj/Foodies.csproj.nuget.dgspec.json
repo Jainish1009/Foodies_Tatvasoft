@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies\\Foodies.csproj": {}
+    "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies_Tatvasoft\\Foodies\\Foodies.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies\\Foodies.csproj": {
+    "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies_Tatvasoft\\Foodies\\Foodies.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies\\Foodies.csproj",
+        "projectUniqueName": "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies_Tatvasoft\\Foodies\\Foodies.csproj",
         "projectName": "Foodies",
-        "projectPath": "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies\\Foodies.csproj",
+        "projectPath": "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies_Tatvasoft\\Foodies\\Foodies.csproj",
         "packagesPath": "C:\\Users\\jaini\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies\\obj\\",
+        "outputPath": "C:\\Users\\jaini\\source\\repos\\Foodies\\Foodies_Tatvasoft\\Foodies\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jaini\\AppData\\Roaming\\NuGet\\NuGet.Config",
