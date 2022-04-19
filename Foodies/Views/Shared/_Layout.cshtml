@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Minizomato</title>
+    <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+    <!--MOBILE DEVICE-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!--JS-->
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/modernizr.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/waypoints.min.js"></script>
+</head>
+<body>
+    <section class="saction1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="menu">
+                        <div class="mobile-nav-container"> </div>
+                        <div class="mobile-nav-btn"><img class="nav-open" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
+                        <nav>
+                            <ul>
+                                <li class="nav-item"><a class="nav-link text-dark">Home</a></li> 
+                                <li class="nav-item"><a class="nav-link text-dark">Popular Restaurants </a></li>
+                                <li class="nav-item"><a class="nav-link text-dark">Order </a></li>
+                                <li class="nav-item"><a class="nav-link text-dark">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="login">
+                        <ul>
+
+                            @if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("Email")))
+                            {
+                                <li class="nav-item nav-link text-dark">@HttpContextAccessor.HttpContext.Session.GetString("Email")</li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Logut">Logut</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a></li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a></li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="saction8">
+        <div class="container" id="contact">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Site Link</h3>
+                    </div>
+                    <div class="sitelink">
+                        <ul>
+                            <li> <span>&#10152;</span><a class="text-white">About Us</a></li>
+                            <li><span>&#10152;</span><a class="text-white">Contact Us</a></li>
+                            <li><span>&#10152;</span><a class="text-white">Privacy Policy</a></li>
+                            <li><span>&#10152;</span><a class="text-white">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Site Link</h3>
+                    </div>
+                    <div class="sitelink">
+                        <ul>
+                            <li> <span>&#10152;</span><a class="text-white">About Us</a></li>
+                            <li><span>&#10152;</span><a class="text-white">Contact Us</a></li>
+                            <li><span>&#10152;</span><a class="text-white">Privacy Policy</a></li>
+                            <li><span>&#10152;</span><a class="text-white">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="follow">
+                        <h3>Follow Us On...</h3>
+                    </div>
+                    <div class="social">
+                        <ul>
+                            <li> <i class="fa fa-facebook-square"></i><a class="text-white">Facebook</a></li>
+                            <li><i class="fa fa-twitter-square"></i><a class="text-white">Twitter</a></li>
+                            <li><i class="fa fa-linkedin-square"></i><a class="text-white">Linkedin</a></li>
+                            <li><i class="fa fa-google-plus-square"></i><a class="text-white">Google Plus</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="submit">
+                        <h3>Subscribe Newsletter</h3>
+                        <p class="text-white">
+                            To get latest updates and food deals
+                            every week
+                        </p>
+                    </div>
+                    <div class="submitbox">
+                        <input type="text" />
+                        <div class="sub"> <a>Submit</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="saction9">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="email">&copy; All right reserved 2014  /  FoodFinder </div>
+                    <p class="freetemplates">Free Template by <a href="http://freetemplates.pro/">FreeTemplates.pro</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - Minizomato - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript" src="js/sidemenu.js"></script>
+</body>
+</html>

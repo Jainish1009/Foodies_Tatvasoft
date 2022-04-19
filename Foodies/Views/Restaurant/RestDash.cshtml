@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Foodies.Models.RestMenu>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "RestDash";
+    Layout = "~/Views/Shared/_RestLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+<h1>Restaurant Dashboard</h1>
+
+<button class="btn btn-primary"><a asp-controller="Restaurant" asp-action="AddMenu" style="color:white; text-decoration:none;">Add Menu</a></button>
+
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search">
+            <input type="text" class="form-control" id="search" name="search" />
+            <br />
+            <input type="submit" value="Search" class="btn btn-success mr-2" />
+        </form>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GetAll">
+            <input type="submit" value="Refresh" class="btn btn-success mr-2" />
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilePath)
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodName)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.FilePath)*@
+                        <img src="~/images/sup.png" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedOn)
+                    </td>
+                    <td>
+                        <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@item.FoodId">Edit</a>
+
+                        @*<a asp-controller="Restaurant" asp-action="Delete" asp-route-id="@item.FoodId">Delete</a>*@
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
