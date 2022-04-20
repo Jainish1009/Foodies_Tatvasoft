@@ -45,6 +45,7 @@ namespace Foodies
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserHelper, UserHelper>();
+            services.AddHttpContextAccessor();
 
         }
 
@@ -61,6 +62,7 @@ namespace Foodies
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

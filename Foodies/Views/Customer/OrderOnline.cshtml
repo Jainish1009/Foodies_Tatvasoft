@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Foodies.Models.RestMenu>
+
+@{
+    ViewData["Title"] = "OrderOnline";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/animate.css" rel="stylesheet" />
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="~/css/responsive.css" rel="stylesheet" />
+<link href="~/css/site.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+
+<h1>Order Online</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Select Items
+            </th>
+          <th>
+                @Html.DisplayNameFor(model => model.FoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Quantity
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" />
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodName)
+                </td>
+                <td>
+                    <img src="~/images/pizz.png" style="height:50px; width:50px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-dark"><a asp-controller="Customer" asp-action="" style="color:white; text-decoration:none;">Order Now</a></button>

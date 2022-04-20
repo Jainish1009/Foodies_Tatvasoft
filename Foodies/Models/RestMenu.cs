@@ -12,7 +12,7 @@ namespace Foodies.Models
         public int FoodId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         [StringLength(50)]

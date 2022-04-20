@@ -19,9 +19,9 @@ namespace Foodies.Controllers
         private ZomatoContext _context;
         private readonly IUserHelper _userHelper;
 
-        public RestaurantController(ZomatoContext context, IUserHelper userHelper)
+        public RestaurantController(ZomatoContext context)
         {
-            _userHelper = userHelper;
+            
             _context = context;
         }
 
@@ -33,16 +33,15 @@ namespace Foodies.Controllers
         [HttpPost]
         public IActionResult AddMenu(string foodname, string filepath,decimal  price)
         {
-            var userid = _userHelper.getUserId();
+           
 
             RestMenu menu = new RestMenu()
             {  
-                UserId = 6, 
+                UserId = Convert.ToString(HttpContext.Session.GetInt32("userid")), 
                 FoodName = foodname,
                 FilePath = filepath,
                 Price = price,
                 CreatedOn = System.DateTime.Now,
-                ModifiedOn = System.DateTime.Now
             };
 
             _context.RestMenus.Add(menu);
@@ -50,12 +49,14 @@ namespace Foodies.Controllers
 
             return RedirectToAction("RestDash", "Restaurant");
         }
-        public IActionResult RestDash()
+        public IActionResult RestDash(RestMenu restMenu)
         {
-            var display = _context.RestMenus.ToList();
+            
 
-             
+            var display = _context.RestMenus.ToList();
+            display = display.Where(p => p.UserId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
             return View(display);
+
         }
 
         [HttpGet]
@@ -99,6 +100,7 @@ namespace Foodies.Controllers
             return View("RestDash", model);
         }
 
+       
 
 
 

@@ -37,6 +37,14 @@ namespace Foodies.Controllers
             List<User> model = _context.Users.ToList();
             return RedirectToAction("CustDash", "Customer");
         }
+        public IActionResult OrderOnline()
+        {
+            //List<RestMenu> model = _context.RestMenus.ToList();
+            //return View("OrderOnline", model);
+            var display = _context.RestMenus.ToList();
+            display = display.Where(p => p.UserId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
+            return View(display);
+        }
 
 
     }

@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<table class="table">
+<table class="table table-bordered table-responsive">
     <thead>
         <tr>
             <th>
@@ -53,13 +53,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            
             <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
+                Action
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -67,6 +64,7 @@
         {
             @foreach (var item in Model)
             {
+
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserId)
@@ -75,22 +73,17 @@
                         @Html.DisplayFor(modelItem => item.FoodName)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.FilePath)*@
-                        <img src="~/images/sup.png" />
+                    
+                        <img src="~/images/sup.png" style="height:50px; width:50px;"/>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedOn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedOn)
-                    </td>
+                    
                     <td>
                         <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@item.FoodId">Edit</a>
 
-                        @*<a asp-controller="Restaurant" asp-action="Delete" asp-route-id="@item.FoodId">Delete</a>*@
+                        
                     </td>
                 </tr>
             }

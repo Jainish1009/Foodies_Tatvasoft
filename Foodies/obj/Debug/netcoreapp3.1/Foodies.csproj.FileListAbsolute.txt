@@ -342,3 +342,4 @@ C:\Users\jaini\source\repos\Foodies\Foodies_Tatvasoft\Foodies\obj\Debug\netcorea
 C:\Users\jaini\source\repos\Foodies\Foodies_Tatvasoft\Foodies\obj\Debug\netcoreapp3.1\Foodies.dll
 C:\Users\jaini\source\repos\Foodies\Foodies_Tatvasoft\Foodies\obj\Debug\netcoreapp3.1\Foodies.pdb
 C:\Users\jaini\source\repos\Foodies\Foodies_Tatvasoft\Foodies\obj\Debug\netcoreapp3.1\Foodies.genruntimeconfig.cache
+C:\Users\jaini\source\repos\Foodies\Foodies_Tatvasoft\Foodies\obj\Debug\netcoreapp3.1\Razor\Views\Customer\OrderOnline.cshtml.g.cs

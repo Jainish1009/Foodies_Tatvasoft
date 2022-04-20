@@ -73,7 +73,7 @@
                             @Html.DisplayFor(modelItem => item.Address)
                         </td>
                         <td>
-                            <button class="btn btn-primary"><a style="color:white; text-decoration:none;">Order Now</a></button>
+                            <button class="btn btn-primary"><a asp-controller="Customer" asp-action="OrderOnline" style="color:white; text-decoration:none;">Order Now</a></button>
                         </td>
                     </tr>
                 }
