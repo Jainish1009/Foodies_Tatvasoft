@@ -38,19 +38,20 @@ namespace Foodies.Controllers
             return RedirectToAction("CustDash", "Customer");
         }
 
-        public IActionResult OrderOnline()
+        public IActionResult OrderOnline(List<RestMenu> restMenu)
         {
+
             List<RestMenu> model = _context.RestMenus.ToList();
-            return View(model);
+            return View(restMenu);
         }
        
         [HttpPost]
-        public IActionResult OrderOnline(User user)
+        public async System.Threading.Tasks.Task<IActionResult> OrderOnline(User user)
         {
             
             List<RestMenu> model = _context.RestMenus.ToList();
             model = model.Where(p => p.UserId == Convert.ToString(user.UserId)).ToList();
-            return View("OrderOnline", model);
+            return Json(model);
 
 
             //var display = _context.RestMenus.ToList();
