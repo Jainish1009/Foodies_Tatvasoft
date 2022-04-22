@@ -4,14 +4,16 @@ using Foodies.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Foodies.Migrations
 {
     [DbContext(typeof(ZomatoContext))]
-    partial class ZomatoContextModelSnapshot : ModelSnapshot
+    [Migration("20220422060837_cart")]
+    partial class cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace Foodies.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("BookOrders");
+                    b.ToTable("BookOrder");
                 });
 
             modelBuilder.Entity("Foodies.Models.RestMenu", b =>

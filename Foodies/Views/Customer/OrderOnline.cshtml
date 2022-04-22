@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="~/css/site.css" />
 
 
-<h1>Order Online</h1>
+<h1>Order Online  @ViewBag.FullName</h1>
 
 
 <table class="table">
@@ -23,7 +23,10 @@
             <th>
                 Select Items
             </th>
-          <th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FoodName)
             </th>
             <th>
@@ -43,34 +46,76 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" />
+                    <input asp-for="@item.HasSelect type="checkbox" value="@item.HasSelect" id="hasselect" />
                 </td>
-                
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                    <input asp-for="@item.UserId" type="hidden" value="@item.UserId" id="userid" />
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FoodName)
+                    <input asp-for="@item.FoodName" type="hidden" value="@item.FoodName" id="foodname" />
                 </td>
                 <td>
                     <img src="~/images/pizz.png" style="height:50px; width:50px;" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
+                    <input asp-for="@item.Price" type="hidden" value="@item.Price" id="price" />
                 </td>
                 <td>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
+                    <select asp-for="@item.Quantity" id="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<button class="btn btn-dark"><a asp-controller="Customer" asp-action="" style="color:white; text-decoration:none;">Order Now</a></button>
+
+
+<button type="submit" class="btn btn-dark"><a asp-controller="Customer" asp-action="OrderNow" style="color:white; text-decoration:none;" onclick="Booknow()">Order Now</a></button>
+
+
+<script>
+    function Booknow() {
+        var hasselect = $("#hasselect").val();
+        var id = $("#userid").val();
+        var foodname = $("#foodname").val();
+        var price = $("#price").val();
+        var quantity = $("#quantity").val();
+
+        var obj = {
+            "HasSelect": hasselect,
+            "UserId": id,
+            "FoodName": foodname,
+            "Price": price,
+            "Quantity": quantity
+        }
+        Submitform(obj);
+    }
+
+    function Submitform(obj) {
+        console.log(obj);
+        $.ajax({
+            url: "/Customer/OrderNow",
+            type: "POST",
+            data: obj,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.error(error);
+            }
+        })
+    }
+</script>

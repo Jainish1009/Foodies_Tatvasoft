@@ -11,6 +11,7 @@ namespace Foodies.Models
         [Key]
         public int FoodId { get; set; }
 
+        public bool HasSelect { get; set; }
         [Required]
         public string UserId { get; set; }
 
@@ -21,6 +22,8 @@ namespace Foodies.Models
         public string FilePath { get; set; }
         [Required]
         public decimal Price { get; set; }
+
+        public int Quantity { get; set; }
         [Required]
         public DateTime CreatedOn { get; set; }
         [Required]

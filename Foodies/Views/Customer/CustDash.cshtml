@@ -29,54 +29,96 @@
         </form>
     </div>
     <div class="col-md-2">
-       
-                <form asp-action="GetAll">
-                    <input type="submit" value="Refresh" class="btn btn-success mr-2" />
-                </form>
-            
+
+        <form asp-action="GetAll">
+            <input type="submit" value="Refresh" class="btn btn-success mr-2" />
+        </form>
+
     </div>
- </div>
+</div>
 
-    <h2>Restaurants</h2>
+<h2>Restaurants</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    RestaurantLogo
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    Book Order
-                </th>
+<table class="table" id="tblrest">
+    <thead>
+        <tr>
+            <th>
+                RestaurantLogo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                Book Order
+            </th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null)
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
             {
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <img src="~/images/pizzhut.png" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FullName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            <button class="btn btn-primary"><a asp-controller="Customer" asp-action="OrderOnline" style="color:white; text-decoration:none;">Order Now</a></button>
-                        </td>
-                    </tr>
-                }
+                <form>
+                <tr>
+                    <td>
+                        <img src="~/images/pizzhut.png" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                        <input asp-for="@item.UserId" type="hidden" value="@item.UserId" id="userid" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                        <input asp-for="@item.FullName" type="hidden" value="@item.FullName" id="fullname" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+
+                        <input asp-for="@item.Address" type="hidden" value="@item.Address" id="address" />
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary"><a asp-controller="Customer" asp-action="OrderOnline" style="color:white; text-decoration:none;" onclick="OrderOnline()">Order Now</a></button>
+                    </td>
+                </tr>
+                </form>
             }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
+
+<script>
+    function OrderOnline() {
+        var id = $("#userid").val();
+        var name = $("#fullname").val();
+        var add = $("#address").val();
+
+        var obj = {
+            "UserId": id,
+            "FullName": name,
+            "Address": add
+        }
+        Submit(obj);
+    }
+
+    function Submit(obj) {
+        console.log(obj);
+        $.ajax({
+            url: "/Customer/OrderOnline",
+            type: "POST",
+            data: obj,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.error(error);
+            }
+        })
+    }
+</script>

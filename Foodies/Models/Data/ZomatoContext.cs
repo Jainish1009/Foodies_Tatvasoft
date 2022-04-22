@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Foodies.Models.ViewModels;
+using Foodies.Models;
 
 namespace Foodies.Models.Data
 {
@@ -21,6 +22,8 @@ namespace Foodies.Models.Data
         public DbSet<User> Users { get; set;  }
 
         public DbSet<RestMenu> RestMenus { get; set; }
+
+        public DbSet<Foodies.Models.BookOrder> BookOrders { get; set; }
 
 
 
