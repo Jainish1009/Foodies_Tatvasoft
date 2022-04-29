@@ -25,6 +25,8 @@ namespace Foodies.Models.Data
 
         public DbSet<Foodies.Models.BookOrder> BookOrders { get; set; }
 
+        public DbSet<Invoice> Invoices { get; set; }
+
 
 
     }

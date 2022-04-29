@@ -42,7 +42,11 @@ namespace Foodies
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddHttpContextAccessor();

@@ -19,8 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.FoodName)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.BasePrice)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
@@ -34,26 +35,67 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FoodName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BasePrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
+        <tr id="lst">
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodName)
+                <input asp-for="@item.FoodName" type="hidden" value="@item.FoodName" id="fdname" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+                <input asp-for="@item.Price" type="hidden" value="@item.Price" id="prce" />
+            </td>
+            <input asp-for="@item.RestId" type="hidden" value="@item.RestId" id="restid" />
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+                <input asp-for="@item.Quantity" type="hidden" value="@item.Quantity" id="qnty" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+                <input asp-for="@item.TotalPrice" type="hidden" value="@item.TotalPrice" id="tlprce" />
+            </td>
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>
-<button type="submit" class="btn btn-dark"><a asp-controller="Customer" asp-action="BookNow" style="color:white; text-decoration:none;" onclick="Invoice()">Order Now</a></button>
+<div>
+    <span style="font-weight:bold; font-size:large;">Order Total =</span>
+    @Model.Sum(i=>i.TotalPrice)
+</div>
+<button type="submit" class="btn btn-dark"><a style="color:white; text-decoration:none;" onclick="Invoice()">FinalStep</a></button>
 
 
 
+<script>
 
+
+    function Invoice() {
+        var Cart = [];
+        $('tr#lst').each(function (index, e) {
+            let food = {
+                "RestId": $(this).find('#restid').val(),
+                "FoodName": $(this).find('#fdname').val(),
+                "Price": $(this).find('#prce').val(),
+                "Quantity": $(this).find('#qnty').val(),
+                "TotalPrice": $(this).find('#tlprce').val()
+            }
+            Cart.push(food);
+        })
+
+        console.log(Cart);
+        $.ajax({
+            type: "POST",
+            url: "/Customer/FinalOrder",
+            data: { listinvoiceviewmodel: Cart},
+            dataType: "json",
+            success: function (data) {
+                window.location.href = '@Url.Action("Invoice", "Customer")';
+                },
+            error: function (data) {
+                    console.error(error);
+                }
+                })
+    }
+
+
+</script>

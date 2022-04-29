@@ -24,7 +24,7 @@
                 Select Items
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                @Html.DisplayNameFor(model => model.RestId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FoodName)
@@ -44,26 +44,26 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    <input asp-for="@item.HasSelect type="checkbox" value="@item.HasSelect" id="hasselect" />
+            <tr id="list">
+                <td class="cont">
+                    <input asp-for="@item.HasSelect type="checkbox" value="@item.HasSelect" id="check_@item.FoodId" class="chbox" />
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                    <input asp-for="@item.UserId" type="hidden" value="@item.UserId" id="userid" />
+                <td class="cont">
+                    @Html.DisplayFor(modelItem => item.RestId)
+                    <input asp-for="@item.RestId" type="hidden" value="@item.RestId" id="restid" />
                 </td>
-                <td>
+                <td class="cont">
                     @Html.DisplayFor(modelItem => item.FoodName)
                     <input asp-for="@item.FoodName" type="hidden" value="@item.FoodName" id="foodname" />
                 </td>
-                <td>
+                <td class="cont">
                     <img src="~/images/pizz.png" style="height:50px; width:50px;" />
                 </td>
-                <td>
+                <td class="cont">
                     @Html.DisplayFor(modelItem => item.Price)
                     <input asp-for="@item.Price" type="hidden" value="@item.Price" id="price" />
                 </td>
-                <td>
+                <td class="cont">
                     <select asp-for="@item.Quantity" id="quantity">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -83,40 +83,43 @@
 </table>
 
 
-<button type="submit" class="btn btn-dark"><a asp-controller="Customer" asp-action="OrderNow" style="color:white; text-decoration:none;" onclick="Booknow()">Order Now</a></button>
+<button type="submit" class="btn btn-dark"><a style="color:white; text-decoration:none;" onclick="Booknow()">Order Now</a></button>
 
 
 <script>
+
+
     function Booknow() {
-        
-        var hasselect = $("#hasselect").val();
-        var id = $("#userid").val();
-        var foodname = $("#foodname").val();
-        var price = $("#price").val();
-        var quantity = $("#quantity").val();
+        var Cart = [];
 
-        var obj = {
-            "HasSelect": hasselect,
-            "UserId": id,
-            "FoodName": foodname,
-            "Price": price,
-            "Quantity": quantity
-        }
-        Submitform(obj);
-    }
+        $('tr#list').each(function (index, e) {
 
-    function Submitform(obj) {
-        console.log(obj);
-        $.ajax({
-            url: "/Customer/OrderNow",
-            type: "POST",
-            data: obj,
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (data) {
-                console.error(error);
+            var a = $(this).find(".chbox");
+            if ($(a).prop("checked") == true) {
+                let food = {
+                    "RestId": $(this).find('#restid').val(),
+                    "FoodName": $(this).find('#foodname').val(),
+                    "Price": $(this).find('#price').val(),
+                    "Quantity": $(this).find('#quantity').val()
+                }
+                Cart.push(food);
             }
         })
+        console.log(Cart);
+        $.ajax({
+            type: "POST",
+            url: "/Customer/CartSummary",
+            data: {listbookorderviewmodel: Cart},
+            
+            dataType: "json",
+            success: function (data) {
+                window.location.href = '@Url.Action("OrderNow", "Customer")';
+                },
+            error: function (data) {
+                    console.error(error);
+                }
+                })
     }
+
+
 </script>

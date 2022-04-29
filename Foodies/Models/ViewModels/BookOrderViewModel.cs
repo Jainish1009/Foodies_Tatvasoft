@@ -1,17 +1,12 @@
-﻿using Foodies.Models.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Foodies.Models
+namespace Foodies.Models.ViewModels
 {
-    public class BookOrder
+    public class BookOrderViewModel
     {
-        [Key]
-        public int OrderId { get; set; }
-
         public string RestId { get; set; }
 
         public string FoodName { get; set; }
@@ -22,8 +17,8 @@ namespace Foodies.Models
 
         public decimal TotalPrice { get; set; }
 
-        public int CreatedBy { get; set; }
-
-        //public List<BookOrder> listbookorder { get; set; }
+        public List<BookOrderViewModel> listbookorderviewmodel { get; set; }
+        //public List<BookOrder> Cart { get; set; }
     }
 }
+

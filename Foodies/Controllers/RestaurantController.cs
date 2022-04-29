@@ -37,7 +37,7 @@ namespace Foodies.Controllers
 
             RestMenu menu = new RestMenu()
             {  
-                UserId = Convert.ToString(HttpContext.Session.GetInt32("userid")), 
+                RestId = Convert.ToString(HttpContext.Session.GetInt32("userid")), 
                 FoodName = foodname,
                 FilePath = filepath,
                 Price = price,
@@ -54,7 +54,7 @@ namespace Foodies.Controllers
             
 
             var display = _context.RestMenus.ToList();
-            display = display.Where(p => p.UserId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
+            display = display.Where(p => p.RestId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
             return View(display);
 
         }
@@ -100,9 +100,12 @@ namespace Foodies.Controllers
             return View("RestDash", model);
         }
 
-       
-
-
+       public IActionResult ViewOrder()
+        {
+            int? a = HttpContext.Session.GetInt32("userid");
+            List<Invoice> model = _context.Invoices.Where(p => p.RestId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
+            return View(model);
+        }
 
     }
 }

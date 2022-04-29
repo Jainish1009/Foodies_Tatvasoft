@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Foodies.Models.Invoice>
+@{
+    ViewData["Title"] = "Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/animate.css" rel="stylesheet" />
+<link href="~/css/font-awesome.css" rel="stylesheet" />
+<link href="~/css/responsive.css" rel="stylesheet" />
+<link href="~/css/site.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+
+<h1>Order Placed Successfully</h1>
+<div><span><strong>FullName: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @ViewBag.UserName</span></div><br />
+<div><span><strong>Address: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>@ViewBag.Address</span></div><br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodName)
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+
+                </td>
+                
+
+            </tr>
+        }
+    </tbody>
+</table>
+<span style="font-weight:bold; font-size:large;">Order Total =</span>
+@Model.Sum(i => i.TotalPrice)

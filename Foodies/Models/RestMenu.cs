@@ -13,7 +13,7 @@ namespace Foodies.Models
 
         public bool HasSelect { get; set; }
         [Required]
-        public string UserId { get; set; }
+        public string RestId { get; set; }
 
         [Required]
         [StringLength(50)]

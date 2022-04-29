@@ -15,13 +15,13 @@
         <nav class="navbar navbar-dark bg-danger">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand"asp-controller="Restaurant" asp-action="RestDash">Dashboard</a>
                 </div>
                 <ul class="nav navbar-nav">
                    
 
-                    <li class="active"><a href="#">Add Menu</a></li>
-                    <li><a>View Order</a></li>
+                    <li class="active nav-item"><a  class="nav-link text-dark"asp-controller="Restaurant" asp-action="AddMenu">Add Menu</a></li>
+                    <li  class="nav-item"><a class="nav-link text-dark" asp-controller="Restaurant" asp-action="ViewOrder">View Order</a></li>
 
 
                 </ul>

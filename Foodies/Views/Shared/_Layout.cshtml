@@ -34,10 +34,9 @@
                         <div class="mobile-nav-btn"><img class="nav-open" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
                         <nav>
                             <ul>
-                                <li class="nav-item"><a class="nav-link text-dark">Home</a></li> 
-                                <li class="nav-item"><a class="nav-link text-dark">Popular Restaurants </a></li>
-                                <li class="nav-item"><a class="nav-link text-dark">Order </a></li>
-                                <li class="nav-item"><a class="nav-link text-dark">Contact</a></li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-controller="Customer" asp-action="CustDash">Home | Popular Restaurants </a></li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-controller="Customer" asp-action="OrderSummary">Order Summary</a></li>
+                               
                             </ul>
                         </nav>
                     </div>

@@ -84,7 +84,7 @@
                         <input asp-for="@item.Address" type="hidden" value="@item.Address" id="address" />
                     </td>
                     <td>
-                        <button type="submit" class="btn btn-primary"><a style="color:white; text-decoration:none;" onclick="OrderOnline()">Order Now</a></button>
+                        <button type="submit" class="btn btn-primary"><a href="@Url.Action("OrderOnline", "Customer")?UserId=@item.UserId" style="color:white; text-decoration:none;" >Order Now</a></button>
                     </td>
                 </tr>
                 </form>
