@@ -81,9 +81,7 @@ namespace Foodies.Controllers
 
 
 
-                //HttpContext.Session.SetString("Email", user.Email);
-
-                //return RedirectToAction("Index", "Home");
+                
             }
             TempData["notfound"] = "NotFound";
             return Redirect((Url.Action("Login", "Account")));

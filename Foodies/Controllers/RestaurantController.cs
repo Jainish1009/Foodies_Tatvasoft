@@ -83,11 +83,7 @@ namespace Foodies.Controllers
         }
 
 
-        //public IActionResult Search(string search)
-        //{
-        //    var model = _context.RestMenus.Where(p => p.FoodName == search).ToList();
-        //    return RedirectToAction("RestDash", "Restaurant");
-        //}
+      
 
         public IActionResult Search(string search)
         {

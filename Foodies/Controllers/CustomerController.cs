@@ -57,9 +57,7 @@ namespace Foodies.Controllers
             return Json(model);
 
 
-            //var display = _context.RestMenus.ToList();
-            //display = display.Where(p => p.FullName == ).ToList();
-            //return View(display);
+            
 
 
         }
@@ -72,18 +70,12 @@ namespace Foodies.Controllers
             {
                 var res = HttpContext.Session.GetString("model");
                 model = JsonConvert.DeserializeObject<List<BookOrder>>(res);
-                //model = (BookOrder)JsonConvert.DeserializeObject<IEnumerable<BookOrder>>(res);
-                //model = (BookOrder)JsonConvert.DeserializeObject<List<BookOrder>>(res);
+               
               
 
             }
             
-            //model.ForEach(n => _context.BookOrders.Add(n));
-            ////_context.BookOrders.Add(model);
-            //_context.SaveChanges();
-
-            //int? a = HttpContext.Session.GetInt32("userid");
-            //List <BookOrder> model = _context.BookOrders.Where(p => p.CreatedBy == HttpContext.Session.GetInt32("userid")).ToList();
+            
             return View(model);
         }
 
