@@ -27,7 +27,24 @@ namespace Foodies.Controllers
 
         public IActionResult AddMenu()
         {
-            return View();
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 2)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
 
         [HttpPost]
@@ -51,19 +68,51 @@ namespace Foodies.Controllers
         }
         public IActionResult RestDash(RestMenu restMenu)
         {
-            
 
-            var display = _context.RestMenus.ToList();
-            display = display.Where(p => p.RestId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
-            return View(display);
-
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 2)
+                {
+                    var display = _context.RestMenus.ToList();
+                    display = display.Where(p => p.RestId == Convert.ToString(logedUserid)).ToList();
+                    return View(display);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            RestMenu model = _context.RestMenus.Where(x => x.FoodId == id).FirstOrDefault();
-            return View(model);
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 2)
+                {
+                    RestMenu model = _context.RestMenus.Where(x => x.FoodId == id).FirstOrDefault();
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
         [HttpPost]
         public IActionResult Edit(int id, RestMenu restMenu)
@@ -87,20 +136,71 @@ namespace Foodies.Controllers
 
         public IActionResult Search(string search)
         {
-            List<RestMenu> model = _context.RestMenus.Where(p => p.FoodName == search).ToList();
-            return View("RestDash", model);
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 2)
+                {
+                    List<RestMenu> model = _context.RestMenus.Where(p => p.FoodName.Contains(search) && p.RestId == Convert.ToString(logedUserid)).ToList();
+                    return View("RestDash", model);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
         public IActionResult GetAll()
         {
-            List<RestMenu> model = _context.RestMenus.ToList();
-            return View("RestDash", model);
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 2)
+                {
+                    List<RestMenu> model = _context.RestMenus.ToList();
+                    return View("RestDash", model);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
 
        public IActionResult ViewOrder()
         {
-            int? a = HttpContext.Session.GetInt32("userid");
-            List<Invoice> model = _context.Invoices.Where(p => p.RestId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
-            return View(model);
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 2)
+                {
+                    int? a = HttpContext.Session.GetInt32("userid");
+                    List<Invoice> model = _context.Invoices.Where(p => p.RestId == Convert.ToString(HttpContext.Session.GetInt32("userid"))).ToList();
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
 
     }

@@ -24,11 +24,12 @@ namespace Foodies.Models
         [StringLength(500)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Choose Date of birth")]
+        //[Required(ErrorMessage = "Choose Date of birth")]
         [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
 
         [Required(ErrorMessage = "Select a UserType")]
+
         public int UserType { get; set; }
 
         [Required(ErrorMessage = "Contact is required")]

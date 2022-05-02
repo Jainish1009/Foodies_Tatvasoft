@@ -38,8 +38,21 @@ namespace Foodies.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            HttpContext.Session.SetString("Email", user.Email);
-            return RedirectToAction("Index", "Home");
+            
+            if (user.UserType == 1)
+            {
+
+                HttpContext.Session.SetString("Email", user.Email);
+
+                return RedirectToAction("CustDash", "Customer");
+            }
+            else if (user.UserType == 2)
+            {
+
+                HttpContext.Session.SetString("Email", user.Email);
+                return RedirectToAction("RestDash", "Restaurant");
+            }
+            return View();
         }
 
         public  IActionResult Login()

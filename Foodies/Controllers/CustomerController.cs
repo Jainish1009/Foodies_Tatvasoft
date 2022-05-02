@@ -21,17 +21,17 @@ namespace Foodies.Controllers
             _context = context;
         }
 
+
         public IActionResult CustDash()
         {
             var display = _context.Users.Where(u => u.UserType == 2).ToList();
-
-
             return View(display);
         }
 
         public IActionResult Search(string search)
         {
-            List<User> model = _context.Users.Where(p => p.FullName == search).ToList();
+            //List<User> model = _context.Users.Where(p => p.FullName == search).ToList();
+            List<User> model = _context.Users.Where(p => p.FullName.Contains(search) && p.UserType == 2).ToList();
             return View("CustDash", model);
         }
         public IActionResult GetAll()
@@ -42,10 +42,27 @@ namespace Foodies.Controllers
 
         public IActionResult OrderOnline(int UserId)
         {
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if(loggeduser.UserType == 1)
+                { 
+                List<RestMenu> model = _context.RestMenus.ToList();
+                model = model.Where(p => p.RestId == UserId.ToString()).ToList();
+                return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
             
-            List<RestMenu> model = _context.RestMenus.ToList();
-            model = model.Where(p => p.RestId == UserId.ToString()).ToList();
-            return View(model);
         }
        
         [HttpPost]
@@ -91,7 +108,8 @@ namespace Foodies.Controllers
                     FoodName = item.FoodName,
                     Price = item.Price,
                     Quantity = item.Quantity,
-                    TotalPrice = item.Price * item.Quantity
+                    TotalPrice = item.Price * item.Quantity,
+                    CreatedBy = (int)HttpContext.Session.GetInt32("userid")
                 };
                 orderlist.Add(model);
             }
@@ -147,9 +165,25 @@ namespace Foodies.Controllers
 
         public IActionResult OrderSummary()
         {
-            int? a = HttpContext.Session.GetInt32("userid");
-            List<Invoice> model = _context.Invoices.Where(p => p.CreatedBy == HttpContext.Session.GetInt32("userid")).ToList();
-            return View(model);
+            int? logedUserid = HttpContext.Session.GetInt32("userid");
+            if (logedUserid == null)
+            {
+                return Redirect((Url.Action("Login", "Account")));
+            }
+            else
+            {
+                User loggeduser = _context.Users.Where(x => x.UserId == logedUserid).FirstOrDefault();
+                ViewBag.UserType = loggeduser.UserType;
+                if (loggeduser.UserType == 1)
+                {
+                    List<Invoice> model = _context.Invoices.Where(p => p.CreatedBy == HttpContext.Session.GetInt32("userid")).ToList();
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
     }
 }

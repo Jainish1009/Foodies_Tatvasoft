@@ -17,6 +17,8 @@ namespace Foodies.Models.ViewModels
 
         public decimal TotalPrice { get; set; }
 
+        public int CreatedBy { get; set; }
+
         public List<BookOrderViewModel> listbookorderviewmodel { get; set; }
         //public List<BookOrder> Cart { get; set; }
     }
